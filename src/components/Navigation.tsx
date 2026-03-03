@@ -20,7 +20,7 @@ export default function Navigation() {
     ];
 
     return (
-        <div className="h-[82px] w-full bg-white border-t border-divider shrink-0 flex items-start justify-around pt-3 rounded-b-[44px]">
+        <div className="h-[82px] w-full bg-white border-t border-divider shrink-0 flex items-start justify-around pt-3 rounded-none sm:rounded-b-[44px]">
             {tabs.map((tab) => {
                 const isActive = tab.path === "/" ? pathname === "/" : pathname.startsWith(tab.path);
                 return (

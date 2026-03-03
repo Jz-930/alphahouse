@@ -32,10 +32,10 @@ export default function RootLayout({
         className={`${notoSansSC.variable} ${dmSans.variable} antialiased`}
       >
         {/* Mobile Shell Outer Wrapper */}
-        <main className="relative w-full h-full max-w-[390px] max-h-[844px] bg-background rounded-[32px] sm:rounded-[44px] shadow-[0_8px_32px_rgba(0,0,0,0.12)] border-[6px] sm:border-8 border-gray-800 overflow-hidden flex flex-col font-sans shrink-0">
+        <main className="relative w-full h-full sm:w-[390px] sm:h-[844px] bg-background rounded-none sm:rounded-[44px] shadow-none sm:shadow-[0_8px_32px_rgba(0,0,0,0.12)] border-0 sm:border-8 border-gray-800 overflow-hidden flex flex-col font-sans shrink-0">
 
           {/* Simulated Status Bar (54px) */}
-          <div className="h-[54px] w-full bg-transparent shrink-0 flex items-center justify-between px-6 pt-2 z-50">
+          <div className="hidden sm:flex h-[54px] w-full bg-transparent shrink-0 items-center justify-between px-6 pt-2 z-50">
             <span className="text-[14px] font-semibold text-text-main">9:41</span>
             <div className="flex items-center gap-1.5 opacity-80">
               {/* Fake Signal/Wifi/Battery icons */}

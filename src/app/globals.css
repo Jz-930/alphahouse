@@ -37,7 +37,12 @@ body {
   justify-content: center;
   align-items: center;
   height: 100dvh;
-  padding: 16px;
+}
+
+@media (min-width: 640px) {
+  body {
+    padding: 16px;
+  }
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

@@ -93,15 +93,16 @@ export default function FinanceLeasePage() {
             <div className="px-5 mb-5 flex gap-3">
                 <div className="flex-1 bg-white rounded-[10px] shadow-[0_1px_4px_rgba(0,0,0,0.05)] p-4 flex items-center justify-between">
                     <div>
-                        <h3 className="text-[12px] font-medium text-text-weak mb-1">平均租约完成度</h3>
-                        <p className="text-[16px] font-bold text-text-main font-mono">68%</p>
+                        <h3 className="text-[12px] font-medium text-text-weak mb-1">收益率</h3>
+                        <p className="text-[16px] font-bold text-text-main font-mono">82%</p>
                     </div>
-                    <div className="w-[42px] h-[42px] rounded-full border-[3px] border-surface flex items-center justify-center relative">
-                        {/* Fake circular progress */}
-                        <svg className="absolute inset-0 w-full h-full transform -rotate-90">
-                            <circle cx="21" cy="21" r="18" stroke="currentColor" strokeWidth="3" fill="none" className="text-primary" strokeDasharray="113" strokeDashoffset="36" />
+                    <div className="w-[42px] h-[42px] relative flex items-center justify-center">
+                        {/* Circular progress */}
+                        <svg className="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 42 42">
+                            <circle cx="21" cy="21" r="18" stroke="currentColor" strokeWidth="3" fill="none" className="text-surface" />
+                            <circle cx="21" cy="21" r="18" stroke="currentColor" strokeWidth="3" fill="none" className="text-primary" strokeDasharray="113" strokeDashoffset="20" strokeLinecap="round" />
                         </svg>
-                        <span className="text-[10px] font-bold text-primary">68</span>
+                        <span className="text-[10px] font-bold text-primary relative z-10">82</span>
                     </div>
                 </div>
                 <div className="flex-1 bg-white rounded-[10px] shadow-[0_1px_4px_rgba(0,0,0,0.05)] p-4 flex flex-col justify-center">
