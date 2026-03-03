@@ -90,13 +90,13 @@ function ChatContent() {
                     </div>
                     <span className="text-[11px] text-text-secondary">{data.propInfo}</span>
                 </div>
-                <button className="w-[34px] h-[34px] rounded-full flex items-center justify-center hover:bg-gray-100">
+                <Link href={`/chat/${id}/settings?name=${encodeURIComponent(name)}&prop=${encodeURIComponent(propName)}`} className="w-[34px] h-[34px] rounded-full flex items-center justify-center hover:bg-gray-100">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A2332" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="12" cy="12" r="1"></circle>
                         <circle cx="12" cy="5" r="1"></circle>
                         <circle cx="12" cy="19" r="1"></circle>
                     </svg>
-                </button>
+                </Link>
             </div>
 
             {/* Message List */}

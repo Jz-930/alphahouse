@@ -16,7 +16,7 @@ export default function Navigation() {
         { name: "消息", path: "/", icon: <MessageSquareText size={24} strokeWidth={1.5} />, showBadge: true },
         { name: "通讯录", path: "/contacts", icon: <Users size={24} strokeWidth={1.5} /> },
         { name: "维修工", path: "/workers", icon: <Wrench size={24} strokeWidth={1.5} /> },
-        { name: "我的", path: "/finance", icon: <User size={24} strokeWidth={1.5} /> }, // Request mentioned re-using finance page for "My"
+        { name: "我的", path: "/profile", icon: <User size={24} strokeWidth={1.5} /> },
     ];
 
     return (
