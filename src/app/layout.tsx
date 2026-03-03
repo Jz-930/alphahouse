@@ -18,6 +18,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "AlphaHouse Demo",
   description: "Property Management Mobile App Demo",
+  authors: [{ name: "jiackey" }],
 };
 
 export default function RootLayout({

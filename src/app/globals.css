@@ -23,6 +23,7 @@
 
   --font-sans: var(--font-noto-sans-sc), system-ui, sans-serif;
   --font-mono: var(--font-dm-sans), monospace;
+  --author-signature: "jiackey";
 }
 
 body {
