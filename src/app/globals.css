@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #205781;
+  --color-secondary: #6B9DAE;
+  --color-surface: #B5D8C2;
+  --color-background: #F0EDCF;
+
+  --color-text-main: #1A2332;
+  --color-text-secondary: #5A6B7A;
+  --color-text-weak: #94A3B8;
+
+  --color-divider: #E2E8F0;
+
+  --color-warning: #E07A2F;
+  --color-danger: #D64545;
+  --color-success: #2D8B55;
+
+  --color-bg-page: #F0EDCF;
+  /* Page background F0EDCF */
+  --color-app-bg: #EAEAEA;
+  /* Gray background outside the mobile phone shell */
+
+  --font-sans: var(--font-noto-sans-sc), system-ui, sans-serif;
+  --font-mono: var(--font-dm-sans), monospace;
+}
+
+body {
+  background-color: var(--color-app-bg);
+  color: var(--color-text-main);
+  /* The mobile shell will have max-width and internal #F0EDCF background */
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  padding: 16px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
