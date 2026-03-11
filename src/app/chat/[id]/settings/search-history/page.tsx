@@ -1,57 +1,31 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { ChevronLeft, Hammer } from "lucide-react";
 
-export default function SearchHistoryPage() {
+export default function PlaceholderPage() {
     const router = useRouter();
-    const [query, setQuery] = useState("");
-
     return (
-        <div className="flex flex-col min-h-[100dvh] bg-white">
-            <div className="flex items-center gap-3 px-4 py-3 border-b border-divider/40">
-                <div className="flex-1 bg-background rounded-full px-4 py-2 flex items-center gap-2">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-text-weak" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    <input
-                        type="text"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        placeholder="搜索聊天记录"
-                        className="bg-transparent border-none outline-none w-full text-[15px]"
-                        autoFocus
-                    />
+        <div className="flex flex-col min-h-screen bg-gray-50">
+            <div className="px-5 pt-4 pb-4 flex items-center bg-white sticky top-0 z-10 shadow-sm border-b border-gray-100">
+                <button onClick={() => router.back()} className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <ChevronLeft size={24} className="text-text-main" />
+                </button>
+                <h1 className="text-[18px] font-bold text-text-main ml-2 flex-1 capitalize">search history</h1>
+            </div>
+            
+            <div className="flex flex-1 flex-col items-center justify-center p-8 text-center pb-32">
+                <div className="w-20 h-20 bg-gray-100 rounded-[24px] flex items-center justify-center text-text-weak mb-6 shadow-sm border border-divider/60">
+                    <Hammer size={32} />
                 </div>
-                <button onClick={() => router.back()} className="text-[15px] text-primary whitespace-nowrap">
-                    取消
+                <h2 className="text-[20px] font-bold text-text-main mb-2">模块建设中</h2>
+                <p className="text-[14px] text-text-secondary leading-relaxed max-w-[260px]">
+                    该功能板块正在紧张开发中。<br/>我们会在下一阶段陆续开放此页面的完整交互。
+                </p>
+                <button onClick={() => router.back()} className="mt-10 bg-primary text-white font-bold py-3.5 px-10 rounded-xl shadow-[0_4px_12px_rgba(25,115,232,0.3)] hover:bg-primary/90 transition-colors">
+                    返回上一页
                 </button>
             </div>
-
-            {!query && (
-                <div className="p-8 mt-4">
-                    <h3 className="text-center text-[14px] text-text-weak mb-6">快速搜索指定内容</h3>
-                    <div className="flex flex-wrap gap-4 justify-center">
-                        <div className="text-primary text-[15px]">日期</div>
-                        <div className="text-divider/80">|</div>
-                        <div className="text-primary text-[15px]">群成员</div>
-                        <div className="text-divider/80">|</div>
-                        <div className="text-primary text-[15px]">文件和图片</div>
-                        <div className="text-divider/80">|</div>
-                        <div className="text-primary text-[15px]">交易记录</div>
-                    </div>
-                </div>
-            )}
-
-            {query && (
-                <div className="flex-1 flex flex-col items-center justify-center text-text-weak pb-20">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mb-4 opacity-50">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                    <p>没有找到相关记录</p>
-                </div>
-            )}
         </div>
     );
 }

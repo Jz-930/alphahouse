@@ -1,130 +1,149 @@
+"use client";
 
+import { useState } from "react";
+import { useAppStore } from "@/store/useAppStore";
+import GlobalPropertySelector from "@/components/GlobalPropertySelector";
+import Link from "next/link";
+import { UserPlus, Search, Phone, Mail, Building2 } from "lucide-react";
 
 export default function ContactsPage() {
-    const properties = [
-        {
-            id: "prop-1",
-            name: "128 Maple St.",
-            contacts: [
-                { id: "c1", name: "David Chen", role: "租客", roleStyle: "bg-[#E8F0FE] text-[#1A73E8]", phone: "555-0123", avatar: "👨‍💼", avatarBg: "bg-surface" },
-                { id: "c2", name: "Wang 师傅", role: "维修工", roleStyle: "bg-[#FFF0E0] text-[var(--color-warning)]", phone: "555-0199", avatar: "👨‍🔧", avatarBg: "bg-[#FFF0E0]" },
-            ]
-        },
-        {
-            id: "prop-2",
-            name: "56 Oak Ave.",
-            contacts: [
-                { id: "c3", name: "Michael James", role: "租客", roleStyle: "bg-[#E8F0FE] text-[#1A73E8]", phone: "555-0456", avatar: "👨‍💻", avatarBg: "bg-surface" },
-                { id: "c4", name: "Agent Lee", role: "中介", roleStyle: "bg-[#E8E0F0] text-[#8E24AA]", phone: "555-0789", avatar: "👩‍💼", avatarBg: "bg-[#E8E0F0]" },
-                { id: "c5", name: "Sarah Smith", role: "保险经纪", roleStyle: "bg-[#E6F4EA] text-[#137333]", phone: "555-0999", avatar: "👩‍🏫", avatarBg: "bg-[#E6F4EA]" },
-            ]
-        },
-        {
-            id: "prop-3",
-            name: "Lakeview Apt Unit 2203",
-            contacts: [
-                { id: "c6", name: "Alice Wong", role: "租客", roleStyle: "bg-[#E8F0FE] text-[#1A73E8]", phone: "555-0111", avatar: "👩‍🎓", avatarBg: "bg-surface" },
-            ]
-        }
+    const { activePropertyId, properties } = useAppStore();
+    const [viewMode, setViewMode] = useState<"property" | "global">("property");
+    const [searchQ, setSearchQ] = useState("");
+
+    const isAllSelected = activePropertyId === "all";
+    const activeProperty = isAllSelected ? { id: "all", name: "全部房产" } : properties.find(p => p.id === activePropertyId);
+    
+    const effectiveViewMode = isAllSelected ? "global" : viewMode;
+
+    // Mock Contacts Data
+    const mockContacts = [
+        { id: "c1", name: "David Wong", role: "租客", phone: "+1 (416) 123-4567", email: "david@example.com", propertyIds: ["prop-1"], avatar: "🧑🏻‍💻", bg: "bg-blue-100/50 text-blue-700" },
+        { id: "c2", name: "Wang 师傅", role: "水管工", phone: "+1 (416) 555-0909", email: "wang.plumbing@test.ca", propertyIds: ["prop-1"], avatar: "👨‍🔧", bg: "bg-orange-100/50 text-orange-700" },
+        { id: "c3", name: "Michael Chen", role: "租客", phone: "+1 (647) 987-6543", email: "michael@example.com", propertyIds: ["prop-2"], avatar: "👨‍💼", bg: "bg-green-100/50 text-green-700" },
+        { id: "c4", name: "Mike HVAC", role: "冷暖气", phone: "+1 (437) 999-8888", email: "mike.hvac@test.ca", propertyIds: ["prop-2"], avatar: "❄️", bg: "bg-sky-100/50 text-sky-700" },
+        { id: "c5", name: "Alice", role: "租客", phone: "+1 (437) 888-9090", email: "alice@student.ca", propertyIds: ["prop-3"], avatar: "👩‍🎓", bg: "bg-pink-100/50 text-pink-700" },
+        { id: "c6", name: "Daniel", role: "租客", phone: "+1 (416) 222-3333", email: "daniel@student.ca", propertyIds: ["prop-3"], avatar: "👨‍🎓", bg: "bg-indigo-100/50 text-indigo-700" },
+        { id: "c7", name: "Agent Lily", role: "中介", phone: "+1 (416) 555-0198", email: "lily.agent@realestate.ca", propertyIds: ["prop-1", "prop-2", "prop-3"], avatar: "👩‍💼", bg: "bg-purple-100/50 text-purple-700" },
+        { id: "c8", name: "Jack 电工", role: "电工", phone: "+1 (647) 111-2222", email: "jack.electric@test.ca", propertyIds: ["prop-1", "prop-3"], avatar: "⚡", bg: "bg-yellow-100/50 text-yellow-700" },
     ];
 
+    let filtered = mockContacts;
+    if (effectiveViewMode === "property" && activePropertyId && !isAllSelected) {
+        filtered = filtered.filter(c => c.propertyIds.includes(activePropertyId));
+    }
+    if (searchQ) {
+        filtered = filtered.filter(c => c.name.toLowerCase().includes(searchQ.toLowerCase()) || c.phone.includes(searchQ));
+    }
+
+    if (!activePropertyId && viewMode === "property") {
+         return (
+             <div className="flex flex-col min-h-screen items-center justify-center bg-gray-50 p-6 text-center">
+                 <h2 className="text-xl font-bold mb-2">未选择房产</h2>
+                 <p className="text-text-secondary text-sm mb-6">请先在主页选择或添加一个房产以查看其联系人</p>
+                 <Link href="/" className="bg-primary text-white px-6 py-2.5 rounded-xl font-medium">返回主页</Link>
+             </div>
+         );
+    }
+
     return (
-        <div className="flex flex-col min-h-full pb-6">
+        <div className="flex flex-col min-h-screen bg-gray-50 pb-[100px]">
             {/* Header */}
-            <div className="px-5 pt-2 pb-4 flex items-center justify-between sticky top-0 bg-background z-10">
-                <h1 className="text-[26px] font-bold text-text-main">通讯录</h1>
-                <div className="flex items-center gap-3">
-                    <button className="w-[38px] h-[38px] rounded-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.05)] flex items-center justify-center">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A2332" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
+            <div className="px-5 pt-4 pb-4 flex items-center justify-between sticky top-0 bg-gray-50/90 backdrop-blur-md z-10">
+                <GlobalPropertySelector />
+                <button className="w-[36px] h-[36px] rounded-full bg-white shadow-sm flex items-center justify-center text-primary hover:bg-gray-50 transition-colors">
+                    <UserPlus size={18} />
+                </button>
+            </div>
+
+            <div className="px-5 my-2">
+                <h1 className="text-[22px] font-bold text-text-main tracking-tight">通讯录</h1>
+            </div>
+
+            {/* Scope Switch */}
+            <div className="px-5 mb-4">
+                <div className="bg-white rounded-[12px] shadow-[0_1px_4px_rgba(0,0,0,0.05)] p-1 flex border border-gray-100">
+                    <button 
+                        onClick={() => setViewMode("property")}
+                        className={`flex-1 py-1.5 text-[13px] font-bold rounded-[10px] transition-colors ${effectiveViewMode === "property" ? "bg-primary text-white shadow-sm" : "text-text-weak hover:text-text-main"} ${isAllSelected ? "opacity-50 cursor-not-allowed" : ""}`}
+                        disabled={isAllSelected}
+                    >
+                        {isAllSelected ? "单套房屋 (请先选择)" : `当前房屋 (${activeProperty?.name || "未选择"})`}
                     </button>
-                    <button className="w-[38px] h-[38px] rounded-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.05)] flex items-center justify-center">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A2332" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="8.5" cy="7" r="4"></circle>
-                            <line x1="20" y1="8" x2="20" y2="14"></line>
-                            <line x1="23" y1="11" x2="17" y2="11"></line>
-                        </svg>
+                    <button 
+                         onClick={() => setViewMode("global")}
+                        className={`flex-1 py-1.5 text-[13px] font-bold text-center rounded-[10px] transition-colors ${effectiveViewMode === "global" ? "bg-background text-text-main shadow-sm border border-divider" : "text-text-weak hover:text-text-main"}`}
+                    >
+                        全部联系人
                     </button>
                 </div>
             </div>
 
-            {/* Search Bar */}
-            <div className="px-5 mb-4">
-                <div className="bg-white rounded-[10px] shadow-[0_1px_4px_rgba(0,0,0,0.05)] h-[42px] flex items-center px-3 gap-2">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    <input
-                        type="text"
-                        placeholder="搜索联系人、电话或角色…"
-                        className="flex-1 bg-transparent text-[14px] text-text-main placeholder-text-weak outline-none"
+            {/* Global Search */}
+            <div className="px-5 mb-6">
+                 <div className="bg-white h-[44px] rounded-[14px] shadow-sm border border-gray-100 flex items-center px-3 gap-2 focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/10 transition-all">
+                    <Search size={16} className="text-gray-400" />
+                    <input 
+                        type="text" 
+                        value={searchQ}
+                        onChange={(e) => setSearchQ(e.target.value)}
+                        placeholder="搜索姓名、电话或房屋名..."
+                        className="flex-1 bg-transparent border-none outline-none text-[14px] text-text-main placeholder:text-gray-400"
                     />
-                </div>
+                 </div>
             </div>
 
             {/* Contacts List */}
-            <div className="flex-1 overflow-y-auto">
-                {properties.map((property) => (
-                    <div key={property.id} className="px-5 pt-4 pb-2">
-                        <h2 className="text-[12px] font-semibold text-text-weak tracking-[1px] uppercase mb-2">
-                            {property.name}
-                        </h2>
-                        <div className="bg-white rounded-[14px] shadow-[0_1px_4px_rgba(0,0,0,0.05)] overflow-hidden">
-                            {property.contacts.map((contact, idx) => {
-                                const isLast = idx === property.contacts.length - 1;
-                                return (
-                                    <div key={contact.id} className="flex px-4 py-[14px] active:bg-gray-50 transition-colors block relative group cursor-pointer hover:opacity-80">
-                                        <div className="flex gap-3 w-full items-center">
-                                            {/* Avatar */}
-                                            <div className={`w-[52px] h-[52px] rounded-[10px] flex items-center justify-center shrink-0 text-[24px] relative ${contact.avatarBg}`}>
-                                                {contact.avatar}
-                                            </div>
-
-                                            {/* Content */}
-                                            <div className="flex-1 min-w-0 flex flex-col justify-center gap-1.5">
-                                                <div className="flex justify-between items-center">
-                                                    <h3 className="text-[15px] font-semibold text-text-main truncate">{contact.name}</h3>
-                                                </div>
-
-                                                <div className="flex items-center gap-2">
-                                                    <span className={`text-[10px] font-semibold rounded-[4px] px-[7px] py-[2px] whitespace-nowrap shrink-0 ${contact.roleStyle}`}>
-                                                        {contact.role}
-                                                    </span>
-                                                    <span className="text-[13px] text-text-secondary truncate font-mono">
-                                                        {contact.phone}
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            {/* Actions */}
-                                            <div className="flex items-center gap-2 shrink-0">
-                                                <button className="w-[32px] h-[32px] rounded-full bg-surface text-primary flex items-center justify-center hover:bg-gray-100 transition-colors">
-                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                                    </svg>
-                                                </button>
-                                                <button className="w-[32px] h-[32px] rounded-full bg-surface text-primary flex items-center justify-center hover:bg-gray-100 transition-colors">
-                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        {/* Divider */}
-                                        {!isLast && (
-                                            <div className="absolute bottom-0 right-0 left-[72px] h-[1px] bg-divider"></div>
-                                        )}
-                                    </div>
-                                );
-                            })}
+            <div className="px-5">
+                <div className="text-[12px] font-bold text-text-weak uppercase tracking-wider mb-3 px-1">
+                     {effectiveViewMode === "property" ? "所属联系人" : "所有联系人"}
+                </div>
+                
+                {filtered.length === 0 ? (
+                    <div className="py-12 flex flex-col items-center justify-center text-center bg-white rounded-2xl border border-dashed border-gray-200">
+                        <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-3">
+                            <span className="text-2xl">📇</span>
                         </div>
+                        <p className="text-text-main font-semibold mb-1">未找到联系人</p>
+                        <p className="text-[13px] text-text-weak">您可以点击右上角添加新的联系人</p>
                     </div>
-                ))}
+                ) : (
+                    <div className="bg-white rounded-2xl shadow-[0_1px_4px_rgba(0,0,0,0.03)] border border-gray-50 overflow-hidden divide-y divide-gray-50">
+                        {filtered.map(contact => (
+                            <div key={contact.id} className="p-4 hover:bg-gray-50 transition-colors cursor-pointer group">
+                                <div className="flex items-center justify-between mb-3">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-[46px] h-[46px] rounded-[14px] bg-gray-100 flex items-center justify-center text-[24px]">
+                                            {contact.avatar}
+                                        </div>
+                                        <div>
+                                            <div className="flex items-center gap-2">
+                                                <h3 className="text-[15px] font-bold text-text-main leading-none">{contact.name}</h3>
+                                                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-[4px] ${contact.bg}`}>
+                                                    {contact.role}
+                                                </span>
+                                            </div>
+                                            {effectiveViewMode === "global" && (
+                                                <p className="text-[12px] text-text-weak mt-1 flex items-center gap-1">
+                                                    <Building2 size={12}/> {contact.propertyIds.length} 个关联房产
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex gap-2">
+                                     <a href={`tel:${contact.phone}`} onClick={e => e.stopPropagation()} className="flex-1 bg-gray-50 hover:bg-primary/5 hover:text-primary transition-colors py-2 rounded-xl flex items-center justify-center gap-1.5 text-[13px] font-medium text-text-secondary">
+                                         <Phone size={14}/> 拨打
+                                     </a>
+                                     <button className="flex-1 bg-gray-50 hover:bg-primary/5 hover:text-primary transition-colors py-2 rounded-xl flex items-center justify-center gap-1.5 text-[13px] font-medium text-text-secondary">
+                                         💬 发消息
+                                     </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

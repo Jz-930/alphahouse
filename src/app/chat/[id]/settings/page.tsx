@@ -183,7 +183,7 @@ export default function ChatSettingsPage() {
                             icon="📊"
                             title="财务报表入口"
                             iconBgClass="bg-surface/60"
-                            href={`/chat/${id}/settings/financial-report`}
+                            href={`/finance/reports`}
                         />
                     </Section>
                 )}

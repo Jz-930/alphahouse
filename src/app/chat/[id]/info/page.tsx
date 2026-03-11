@@ -10,7 +10,7 @@ export default function ChatInfoPage() {
         <div className="flex flex-col min-h-full bg-background pb-8">
             {/* Top Bar */}
             <div className="h-[56px] border-b border-divider bg-white shrink-0 flex items-center px-4 sticky top-0 z-10 w-full relative">
-                <button onClick={() => router.back()} className="w-[34px] h-[34px] rounded-full flex items-center justify-center hover:bg-gray-100 absolute left-4">
+                <button onClick={() => router.push(`/chat/${encodeURIComponent(typeof window !== "undefined" ? location.pathname.split("/")[2] : "")}`)} className="w-[34px] h-[34px] rounded-full flex items-center justify-center hover:bg-gray-100 absolute left-4">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A2332" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="15 18 9 12 15 6"></polyline>
                     </svg>

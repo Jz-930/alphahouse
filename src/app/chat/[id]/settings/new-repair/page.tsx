@@ -1,74 +1,30 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { ChevronLeft, Hammer } from "lucide-react";
 
-export default function NewRepairPage() {
+export default function PlaceholderPage() {
     const router = useRouter();
-    const [type, setType] = useState("管道");
-    const [desc, setDesc] = useState("");
-
-    const types = ["管道漏水", "电器故障", "锁具问题", "网络故障", "其他"];
-
     return (
-        <div className="flex flex-col min-h-[100dvh] bg-background">
-            <div className="h-[56px] bg-white flex items-center px-4 sticky top-0 z-20 border-b border-divider/40">
-                <button onClick={() => router.back()} className="w-[34px] h-[34px] rounded-full flex items-center justify-center hover:bg-black/5 -ml-2 transition-colors">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A2332" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
+        <div className="flex flex-col min-h-screen bg-gray-50">
+            <div className="px-5 pt-4 pb-4 flex items-center bg-white sticky top-0 z-10 shadow-sm border-b border-gray-100">
+                <button onClick={() => router.back()} className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <ChevronLeft size={24} className="text-text-main" />
                 </button>
-                <div className="flex-1 text-center font-bold text-[16px] text-text-main pr-[26px]">
-                    新建维修申请
-                </div>
+                <h1 className="text-[18px] font-bold text-text-main ml-2 flex-1 capitalize">new repair</h1>
             </div>
-
-            <div className="p-4 pt-6 flex-1 flex flex-col">
-                <div className="font-bold text-[15px] mb-3 px-1 text-text-main">问题分类</div>
-                <div className="flex flex-wrap gap-3 mb-6">
-                    {types.map(t => (
-                        <div
-                            key={t}
-                            onClick={() => setType(t)}
-                            className={`px-4 py-2 rounded-[20px] text-[14px] font-medium border transition-colors cursor-pointer ${type === t ? 'bg-primary/10 border-primary text-primary' : 'bg-white border-divider/60 text-text-secondary hover:bg-black/5'}`}
-                        >
-                            {t}
-                        </div>
-                    ))}
+            
+            <div className="flex flex-1 flex-col items-center justify-center p-8 text-center pb-32">
+                <div className="w-20 h-20 bg-gray-100 rounded-[24px] flex items-center justify-center text-text-weak mb-6 shadow-sm border border-divider/60">
+                    <Hammer size={32} />
                 </div>
-
-                <div className="font-bold text-[15px] mb-3 px-1 text-text-main">详细描述</div>
-                <div className="bg-white rounded-[16px] border border-divider/60 overflow-hidden p-4 h-[120px] mb-6 shadow-sm">
-                    <textarea
-                        value={desc}
-                        onChange={(e) => setDesc(e.target.value)}
-                        className="w-full h-full resize-none outline-none text-[15px] text-text-main placeholder-text-weak"
-                        placeholder="请详细描述需要维修的问题，或可在此上传照片..."
-                    />
-                </div>
-
-                <div className="flex items-center gap-4 mb-8">
-                    <div className="w-[80px] h-[80px] bg-white border border-dashed border-divider rounded-[12px] flex flex-col items-center justify-center text-text-weak cursor-pointer hover:bg-black/5">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mb-1">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                            <polyline points="21 15 16 10 5 21"></polyline>
-                        </svg>
-                        <span className="text-[12px]">添加图片</span>
-                    </div>
-                </div>
-
-                <div className="mt-auto pt-4">
-                    <div className="text-[12px] text-text-weak text-center mb-3">
-                        提交后将自动为您与房东/修理工创建一个临时维修讨论群。
-                    </div>
-                    <div
-                        onClick={() => router.back()}
-                        className="bg-primary text-white rounded-[12px] py-3.5 text-center font-bold text-[16px] cursor-pointer hover:bg-primary/90 transition-colors shadow-[0_4px_12px_rgba(25,115,232,0.3)]"
-                    >
-                        提交申请并创建群聊
-                    </div>
-                </div>
+                <h2 className="text-[20px] font-bold text-text-main mb-2">模块建设中</h2>
+                <p className="text-[14px] text-text-secondary leading-relaxed max-w-[260px]">
+                    该功能板块正在紧张开发中。<br/>我们会在下一阶段陆续开放此页面的完整交互。
+                </p>
+                <button onClick={() => router.back()} className="mt-10 bg-primary text-white font-bold py-3.5 px-10 rounded-xl shadow-[0_4px_12px_rgba(25,115,232,0.3)] hover:bg-primary/90 transition-colors">
+                    返回上一页
+                </button>
             </div>
         </div>
     );

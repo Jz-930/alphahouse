@@ -1,76 +1,30 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { ChevronLeft, Hammer } from "lucide-react";
 
-export default function PermissionsPage() {
+export default function PlaceholderPage() {
     const router = useRouter();
-    const [allowInvite, setAllowInvite] = useState(false);
-    const [allowEdit, setAllowEdit] = useState(false);
-    const [allowPin, setAllowPin] = useState(true);
-
     return (
-        <div className="flex flex-col min-h-[100dvh] bg-background">
-            <div className="h-[56px] bg-white flex items-center px-4 sticky top-0 z-20 border-b border-divider/40">
-                <button onClick={() => router.back()} className="w-[34px] h-[34px] rounded-full flex items-center justify-center hover:bg-black/5 -ml-2 transition-colors">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A2332" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
+        <div className="flex flex-col min-h-screen bg-gray-50">
+            <div className="px-5 pt-4 pb-4 flex items-center bg-white sticky top-0 z-10 shadow-sm border-b border-gray-100">
+                <button onClick={() => router.back()} className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <ChevronLeft size={24} className="text-text-main" />
                 </button>
-                <div className="flex-1 text-center font-bold text-[16px] text-text-main pr-[26px]">
-                    群管理权限
-                </div>
+                <h1 className="text-[18px] font-bold text-text-main ml-2 flex-1 capitalize">permissions</h1>
             </div>
-
-            <div className="p-4 pt-6">
-                <div className="bg-white rounded-[16px] overflow-hidden border border-divider/60">
-                    <div className="flex items-center justify-between px-4 py-4 border-b border-divider/40">
-                        <div>
-                            <div className="text-[15px] font-medium text-text-main">允许普通成员邀请他人进群</div>
-                            <div className="text-[12px] text-text-weak mt-1">关闭后，只有群主或管理员可以邀请</div>
-                        </div>
-                        <div
-                            onClick={() => setAllowInvite(!allowInvite)}
-                            className={`w-12 h-6 rounded-full transition-colors relative cursor-pointer ${allowInvite ? 'bg-primary' : 'bg-divider/80'}`}
-                        >
-                            <div className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform ${allowInvite ? 'translate-x-[26px]' : 'translate-x-0.5'}`}></div>
-                        </div>
-                    </div>
-
-                    <div className="flex items-center justify-between px-4 py-4 border-b border-divider/40">
-                        <div>
-                            <div className="text-[15px] font-medium text-text-main">允许普通成员修改群聊名称</div>
-                            <div className="text-[12px] text-text-weak mt-1">关闭后，只有群主或管理员可以修改</div>
-                        </div>
-                        <div
-                            onClick={() => setAllowEdit(!allowEdit)}
-                            className={`w-12 h-6 rounded-full transition-colors relative cursor-pointer ${allowEdit ? 'bg-primary' : 'bg-divider/80'}`}
-                        >
-                            <div className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform ${allowEdit ? 'translate-x-[26px]' : 'translate-x-0.5'}`}></div>
-                        </div>
-                    </div>
-
-                    <div className="flex items-center justify-between px-4 py-4">
-                        <div>
-                            <div className="text-[15px] font-medium text-text-main">允许普通成员置顶消息</div>
-                            <div className="text-[12px] text-text-weak mt-1">开启后，所有人均可置顶重要消息</div>
-                        </div>
-                        <div
-                            onClick={() => setAllowPin(!allowPin)}
-                            className={`w-12 h-6 rounded-full transition-colors relative cursor-pointer ${allowPin ? 'bg-primary' : 'bg-divider/80'}`}
-                        >
-                            <div className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform ${allowPin ? 'translate-x-[26px]' : 'translate-x-0.5'}`}></div>
-                        </div>
-                    </div>
+            
+            <div className="flex flex-1 flex-col items-center justify-center p-8 text-center pb-32">
+                <div className="w-20 h-20 bg-gray-100 rounded-[24px] flex items-center justify-center text-text-weak mb-6 shadow-sm border border-divider/60">
+                    <Hammer size={32} />
                 </div>
-
-                <div className="mt-8 bg-white rounded-[16px] overflow-hidden border border-divider/60 px-4 py-4">
-                    <div className="flex items-center justify-between">
-                        <div className="text-[15px] font-bold text-danger text-center w-full cursor-pointer">
-                            转让群主
-                        </div>
-                    </div>
-                </div>
+                <h2 className="text-[20px] font-bold text-text-main mb-2">模块建设中</h2>
+                <p className="text-[14px] text-text-secondary leading-relaxed max-w-[260px]">
+                    该功能板块正在紧张开发中。<br/>我们会在下一阶段陆续开放此页面的完整交互。
+                </p>
+                <button onClick={() => router.back()} className="mt-10 bg-primary text-white font-bold py-3.5 px-10 rounded-xl shadow-[0_4px_12px_rgba(25,115,232,0.3)] hover:bg-primary/90 transition-colors">
+                    返回上一页
+                </button>
             </div>
         </div>
     );

@@ -1,57 +1,30 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { ChevronLeft, Hammer } from "lucide-react";
 
-export default function RentPaymentPage() {
+export default function PlaceholderPage() {
     const router = useRouter();
-
     return (
-        <div className="flex flex-col min-h-[100dvh] bg-background">
-            <div className="h-[56px] bg-white flex items-center px-4 sticky top-0 z-20 border-b border-divider/40">
-                <button onClick={() => router.back()} className="w-[34px] h-[34px] rounded-full flex items-center justify-center hover:bg-black/5 -ml-2 transition-colors">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A2332" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
+        <div className="flex flex-col min-h-screen bg-gray-50">
+            <div className="px-5 pt-4 pb-4 flex items-center bg-white sticky top-0 z-10 shadow-sm border-b border-gray-100">
+                <button onClick={() => router.back()} className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <ChevronLeft size={24} className="text-text-main" />
                 </button>
-                <div className="flex-1 text-center font-bold text-[16px] text-text-main pr-[26px]">
-                    租金支付
-                </div>
+                <h1 className="text-[18px] font-bold text-text-main ml-2 flex-1 capitalize">rent payment</h1>
             </div>
-
-            <div className="p-4 pt-8 flex-1 flex flex-col items-center">
-                <div className="text-[14px] text-text-secondary mb-2">本期应付租金 (5月)</div>
-                <div className="text-[48px] font-bold text-text-main mb-8">$ 2,100.00</div>
-
-                <div className="w-full bg-white rounded-[16px] border border-divider/60 shadow-sm p-4 mb-8">
-                    <div className="flex items-center justify-between mb-4 border-b border-divider/40 pb-4">
-                        <span className="text-[14px] text-text-secondary">支付截止日期</span>
-                        <span className="text-[14px] font-medium text-text-main">2024-05-01</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <span className="text-[14px] text-text-secondary">收款方</span>
-                        <span className="text-[14px] font-medium text-text-main">AlphaHouse Property LLC</span>
-                    </div>
+            
+            <div className="flex flex-1 flex-col items-center justify-center p-8 text-center pb-32">
+                <div className="w-20 h-20 bg-gray-100 rounded-[24px] flex items-center justify-center text-text-weak mb-6 shadow-sm border border-divider/60">
+                    <Hammer size={32} />
                 </div>
-
-                <div className="mt-auto w-full">
-                    <div className="bg-primary/5 border border-primary/20 rounded-[12px] p-4 flex items-start gap-3 mb-6">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 mt-0.5">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="16" x2="12" y2="12"></line>
-                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                        </svg>
-                        <div className="text-[13px] text-text-secondary leading-relaxed">
-                            该功能属于第二阶段计划，当前为演示界面。实际将会接入 Stripe / Plaid 支持信用卡及银行转账。
-                        </div>
-                    </div>
-
-                    <div
-                        onClick={() => router.back()}
-                        className="bg-primary text-white rounded-[12px] py-3.5 text-center font-bold text-[16px] cursor-pointer hover:bg-primary/90 transition-colors shadow-[0_4px_12px_rgba(25,115,232,0.3)] mb-4"
-                    >
-                        去支付 (Demo)
-                    </div>
-                </div>
+                <h2 className="text-[20px] font-bold text-text-main mb-2">模块建设中</h2>
+                <p className="text-[14px] text-text-secondary leading-relaxed max-w-[260px]">
+                    该功能板块正在紧张开发中。<br/>我们会在下一阶段陆续开放此页面的完整交互。
+                </p>
+                <button onClick={() => router.back()} className="mt-10 bg-primary text-white font-bold py-3.5 px-10 rounded-xl shadow-[0_4px_12px_rgba(25,115,232,0.3)] hover:bg-primary/90 transition-colors">
+                    返回上一页
+                </button>
             </div>
         </div>
     );

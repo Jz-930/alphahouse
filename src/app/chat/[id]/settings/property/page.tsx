@@ -20,7 +20,7 @@ export default function PropertyAssociationPage() {
     return (
         <div className="flex flex-col min-h-[100dvh] bg-background">
             <div className="h-[56px] bg-white flex items-center px-4 sticky top-0 z-20 border-b border-divider/40">
-                <button onClick={() => router.back()} className="w-[34px] h-[34px] rounded-full flex items-center justify-center hover:bg-black/5 -ml-2 transition-colors">
+                <button onClick={() => router.push(`/chat/${encodeURIComponent(typeof window !== "undefined" ? location.pathname.split("/")[2] : "")}/settings`)} className="w-[34px] h-[34px] rounded-full flex items-center justify-center hover:bg-black/5 -ml-2 transition-colors">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A2332" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="15 18 9 12 15 6"></polyline>
                     </svg>
@@ -69,7 +69,7 @@ export default function PropertyAssociationPage() {
                 </div>
 
                 <div
-                    onClick={() => router.back()}
+                    onClick={() => router.push(`/chat/${encodeURIComponent(typeof window !== "undefined" ? location.pathname.split("/")[2] : "")}/settings`)}
                     className="bg-primary text-white rounded-[12px] py-3.5 text-center font-bold text-[16px] cursor-pointer hover:bg-primary/90 transition-colors shadow-[0_4px_12px_rgba(25,115,232,0.3)]"
                 >
                     保存设置

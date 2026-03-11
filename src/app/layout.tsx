@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_SC, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import AppGuard from "@/components/AppGuard";
 
 const notoSansSC = Noto_Sans_SC({
   variable: "--font-noto-sans-sc",
@@ -57,7 +58,7 @@ export default function RootLayout({
 
           {/* Scrollable Content Area */}
           <div className="flex-1 w-full overflow-y-auto overflow-x-hidden relative no-scrollbar bg-background">
-            {children}
+            <AppGuard>{children}</AppGuard>
           </div>
 
           <Navigation />

@@ -1,40 +1,30 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { ChevronLeft, Hammer } from "lucide-react";
 
-export default function AnnouncementPage() {
+export default function PlaceholderPage() {
     const router = useRouter();
-    const [text, setText] = useState("欢迎加入本群！\n\n1. 房租支付：每月1号前完成支付。\n2. 杂费说明：水电气网费用按月结算平摊。\n3. 维修问题：如有损坏请及时通过“新建维修申请”上报。\n4. 生活公约：晚上11点后请保持安静，保持公共区域整洁。\n\n感谢配合！");
-
     return (
-        <div className="flex flex-col min-h-[100dvh] bg-background">
-            <div className="h-[56px] bg-white flex items-center justify-between px-4 sticky top-0 z-20 border-b border-divider/40">
-                <button onClick={() => router.back()} className="w-[34px] h-[34px] rounded-full flex items-center justify-center hover:bg-black/5 -ml-2 transition-colors">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A2332" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
+        <div className="flex flex-col min-h-screen bg-gray-50">
+            <div className="px-5 pt-4 pb-4 flex items-center bg-white sticky top-0 z-10 shadow-sm border-b border-gray-100">
+                <button onClick={() => router.back()} className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <ChevronLeft size={24} className="text-text-main" />
                 </button>
-                <div className="font-bold text-[16px] text-text-main">
-                    群公告
-                </div>
-                <button className="text-[15px] font-medium text-primary px-2" onClick={() => router.back()}>
-                    保存
-                </button>
+                <h1 className="text-[18px] font-bold text-text-main ml-2 flex-1 capitalize">announcement</h1>
             </div>
-
-            <div className="p-4 flex-1 flex flex-col">
-                <div className="bg-white rounded-[16px] border border-divider/60 flex-1 overflow-hidden p-4">
-                    <textarea
-                        value={text}
-                        onChange={(e) => setText(e.target.value)}
-                        className="w-full h-full resize-none outline-none text-[15px] text-text-main leading-relaxed"
-                        placeholder="请输入群公告..."
-                    />
+            
+            <div className="flex flex-1 flex-col items-center justify-center p-8 text-center pb-32">
+                <div className="w-20 h-20 bg-gray-100 rounded-[24px] flex items-center justify-center text-text-weak mb-6 shadow-sm border border-divider/60">
+                    <Hammer size={32} />
                 </div>
-                <div className="mt-4 text-[13px] text-text-weak text-center">
-                    公告会发布在群聊天中，所有新进群成员也可看到。
-                </div>
+                <h2 className="text-[20px] font-bold text-text-main mb-2">模块建设中</h2>
+                <p className="text-[14px] text-text-secondary leading-relaxed max-w-[260px]">
+                    该功能板块正在紧张开发中。<br/>我们会在下一阶段陆续开放此页面的完整交互。
+                </p>
+                <button onClick={() => router.back()} className="mt-10 bg-primary text-white font-bold py-3.5 px-10 rounded-xl shadow-[0_4px_12px_rgba(25,115,232,0.3)] hover:bg-primary/90 transition-colors">
+                    返回上一页
+                </button>
             </div>
         </div>
     );

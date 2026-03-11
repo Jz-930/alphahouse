@@ -1,48 +1,30 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { ChevronLeft, Hammer } from "lucide-react";
 
-export default function ArchivedMessagesPage() {
+export default function PlaceholderPage() {
     const router = useRouter();
-
-    const messages = [
-        { sender: "房东", content: "请注意，由于物业要进行外墙清洗，下周二（20日）上午9点到下午5点阳台不可晾晒衣物。", date: "昨天 14:30" },
-        { sender: "房东", content: "本月的公共水电账单已经出来，每户分摊 $35.40。请随同下月租金一起支付。", date: "上周五 10:15" }
-    ];
-
     return (
-        <div className="flex flex-col min-h-[100dvh] bg-background">
-            <div className="h-[56px] bg-white flex items-center px-4 sticky top-0 z-20 border-b border-divider/40">
-                <button onClick={() => router.back()} className="w-[34px] h-[34px] rounded-full flex items-center justify-center hover:bg-black/5 -ml-2 transition-colors">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A2332" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
+        <div className="flex flex-col min-h-screen bg-gray-50">
+            <div className="px-5 pt-4 pb-4 flex items-center bg-white sticky top-0 z-10 shadow-sm border-b border-gray-100">
+                <button onClick={() => router.back()} className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <ChevronLeft size={24} className="text-text-main" />
                 </button>
-                <div className="flex-1 text-center font-bold text-[16px] text-text-main pr-[26px]">
-                    重要信息归档
-                </div>
+                <h1 className="text-[18px] font-bold text-text-main ml-2 flex-1 capitalize">archived messages</h1>
             </div>
-
-            <div className="p-4 flex flex-col gap-4">
-                {messages.map((msg, i) => (
-                    <div key={i} className="bg-white rounded-[16px] p-4 border border-divider/60 shadow-[0_2px_8px_rgba(0,0,0,0.04)] relative">
-                        <div className="absolute top-4 right-4 text-warning">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                            </svg>
-                        </div>
-                        <div className="flex items-center gap-2 mb-3">
-                            <div className="w-[28px] h-[28px] rounded-full bg-primary/20 flex items-center justify-center text-primary text-[12px] font-bold shrink-0">
-                                {msg.sender[0]}
-                            </div>
-                            <div className="font-medium text-[14px] text-text-main">{msg.sender}</div>
-                            <div className="text-[12px] text-text-weak ml-auto pr-6">{msg.date}</div>
-                        </div>
-                        <div className="text-[15px] text-text-secondary leading-relaxed pl-[36px]">
-                            {msg.content}
-                        </div>
-                    </div>
-                ))}
+            
+            <div className="flex flex-1 flex-col items-center justify-center p-8 text-center pb-32">
+                <div className="w-20 h-20 bg-gray-100 rounded-[24px] flex items-center justify-center text-text-weak mb-6 shadow-sm border border-divider/60">
+                    <Hammer size={32} />
+                </div>
+                <h2 className="text-[20px] font-bold text-text-main mb-2">模块建设中</h2>
+                <p className="text-[14px] text-text-secondary leading-relaxed max-w-[260px]">
+                    该功能板块正在紧张开发中。<br/>我们会在下一阶段陆续开放此页面的完整交互。
+                </p>
+                <button onClick={() => router.back()} className="mt-10 bg-primary text-white font-bold py-3.5 px-10 rounded-xl shadow-[0_4px_12px_rgba(25,115,232,0.3)] hover:bg-primary/90 transition-colors">
+                    返回上一页
+                </button>
             </div>
         </div>
     );
